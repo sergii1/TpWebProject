@@ -1,0 +1,75 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}title{% endblock %}</title>
+    <link href="{% static 'bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet">
+</head>
+<body>
+<!--шапка-->
+<div class="container-fluid sticky-top border-dark bg-light border-bottom">
+    <div class="row">
+        <div class="col col-md-auto justify-content-center align-self-center text-white-100 " style="font-size: 24px">
+            <a href="{% url 'index' %}" style="color: black">AskPupkin</a>
+        </div>
+        <form class="form-inline col col-md-auto   ">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="btn btn-outline-success my-2 my-sm-0"><a href="{% url 'ask' %}" style="color: black">Ask</a></div>
+
+        {% block headerDifferencePart %}
+        {% endblock %}
+    </div>
+</div>
+
+<!--левая верхная часть-->
+{% block  subTitle %}
+    <div class="container ml-0 mr-0 mt-2 mb-2 pl-2">
+        <div class="row ml-0">
+            <div class="col col-md-auto pl-1">
+                <h3 class="align-self-end mb-0"><a href="{% url 'index' %}">New Questions</a></h3>
+            </div>
+            <div class="col col-md-auto pl-1">
+                <h3 class="align-self-end mb-0"><a href="{% url 'hot' %}">Hot Questions</a></h3>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!--часть с контентом и топами тегов и авторов -->
+<div class="container-fluid  mt-2 mb-2 pr-0">
+    <div class="row mr-0 pr-0">
+        <!--вопросы -->
+        <div class="col pl-2 col-10 ">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <!-- правая часть -->
+        <div class="col-2 my-0 mr-auto">
+            <div class="row ml-0"><h3 class="ml-0">Popular tags</h3></div>
+            <ul class="list-group-horizontal pl-0 ml-0">
+                {% for tag in  popularTags %}
+                    <li class="list-inline-item mr"><a href="{% url 'tag' tag %}">{{ tag }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <div class="row ml-0"><h3 class="ml-0">Best member</h3></div>
+            <ul class="list-group pl-0 ml-0">
+                {% for user in popularUsers %}
+                    <li class="list-inline-item mr-0"><a href="userpage.html" class="card-link">{{ user }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination -->
+{% block paginator %}
+{% endblock %}
+
+<script src="{% static 'bootstrap-4.3.1-dist/js/jquery.js' %}"></script>
+<script src="{% static 'bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

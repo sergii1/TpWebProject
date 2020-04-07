@@ -1,0 +1,90 @@
+{% extends "basicTemplates/basic.html" %}
+{% load staticfiles %}
+{% block title %}Question{% endblock %}
+{% block subTitle %}{% endblock %}
+{% block content %}
+    <!--вопрос-->
+    <div class="row mx-1 ml-1 col-md-auto mb-2  border-dark border-bottom">
+        <div class="col-1 p-0">
+            <div class="row m-0 p-0 col-md-auto">
+                <img src="{% static 'avatar.png' %}" class="img-thumbnail pr-2">
+            </div>
+            <div class="row ml-0 mr-0">
+                <div class="col p-0">
+                    <img src="{% static 'plus' %}" width="20px">
+                    <img src="{% static 'minus' %}" width="20px">
+                    <span><br>+3</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-10 d-inline-block">
+            <div class="row ml-0 mr-0">
+                <h4 class="col"><a href="{{ question.get_absolute_url }}" class="btn-link">{{ question.title }}</a></h4>
+            </div>
+            <div class="row ml-0 mr-0 ">
+                <p class="col">{{ question.text }}</p>
+            </div>
+            <div class="row ml-0 mr-0 ">
+                <div class="col">
+                    Tags:
+                    <ul class="list-group-horizontal d-inline-block pl-0 ml-0">
+                        {% for tag in question.tags.all %}
+                            <li class="list-inline-item mr-0"><a href="{% url 'tag' tag.name %}"
+                                                                 class="card-link">{{ tag.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ответ 1 -->
+
+    {% for answer in answers %}
+        <div class="row mx-1 border border-dark rounded bg-light ml-1 col-md-auto mb-2">
+            <div class="col-1 p-0">
+                <div class="row m-0 p-0 col-md-auto">
+                    <img src="{% static 'avatar.png' %}" class="img-thumbnail pr-2">
+                </div>
+                <div class="row ml-0 mr-0">
+                    <div class="col p-0">
+                        <img src="{% static 'plus' %}" width="20px">
+                        <img src="{% static 'minus' %}" width="20px">
+                        <span><br>+3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 d-inline-block">
+                <div class="row ml-0 mr-0 ">
+                    <p class="col ">{{ answer.content }}</p>
+                </div>
+                <div class="row ml-0 mr-0 align-self-end">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Correct
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <form method="POST">{% csrf_token %}
+        <!--новый ответ -->
+        <div class="row mx-1  border-dark border-top  ml-1 col-md-auto mb-2 px-0">
+
+            <div class="col form-group px-0">
+                <label for="exampleFormControlTextarea1">Input your answer</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Send answer</button>
+
+        <!--новый ответ -->
+{#     {{ form.as_p }}#}
+{#    <input type="submit" value="Send answer" class="btn btn-primary">#}
+    </form>
+{% endblock %}

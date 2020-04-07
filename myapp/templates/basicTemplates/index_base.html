@@ -1,0 +1,77 @@
+{% extends "basicTemplates/basic.html" %}
+{% load staticfiles %}
+
+{% block  subTitle %}
+    <div class="container ml-0 mr-0 mt-2 mb-2 pl-2">
+        <div class="row ml-0">
+            <div class="col col-md-auto pl-1">
+                <h3 class="align-self-end mb-0"><a href="{% url 'index' %}">New Questions</a></h3>
+            </div>
+            <div class="col col-md-auto pl-1">
+                <h3 class="align-self-end mb-0"><a href="{% url 'hot' %}">Hot Questions</a></h3>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% for question in questions %}
+        <div class="row mx-1 border border-dark rounded bg-light ml-1 col-md-auto mb-2">
+            <div class="col-1 p-0">
+                <div class="m-0 p-0 col-md-auto">
+                    <img src="{% static 'avatar.png' %}" class="img-thumbnail pr-2">
+                </div>
+                <div class="row ml-0 mr-0">
+                    <div class="col p-0">
+                        <img src="{% static 'plus' %}" width="20px">
+                        <img src="{% static 'minus' %}" width="20px">
+                        <span><br>{{question.rating}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 d-inline-block">
+                <div class="row ml-0 mr-0">
+                    <h4 class="col"><a href="{{ question.get_absolute_url }}" class="btn-link">{{question.title}}</a></h4>
+                </div>
+                <div class="row ml-0 mr-0 ">
+                    <p class="col text-truncate">{{question.text}}</p>
+                </div>
+
+                <div class="row ml-0 mr-0 ">
+                    <div class="col">
+                        <a href="{% url 'question' question.pk %}" class="btn-link">answers{{question.answersNumber}}</a>
+                        tags:
+                        <ul class="list-group-horizontal d-inline-block pl-0 ml-0">
+                            {% for tag in question.tags.all %}
+                                <li class="list-inline-item mr"><a href="{% url 'tag' tag.name %}" class="card-link">{{ tag.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+{% block paginator %}
+    <ul class="pagination justify-content-center mt-5 col-md-auto">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        {% for i in pageList %}
+            <li class="page-item">
+                <a class="page-link" href="#">{{ i }}</a>
+            </li>
+        {% endfor %}
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}

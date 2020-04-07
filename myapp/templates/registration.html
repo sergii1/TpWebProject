@@ -1,0 +1,53 @@
+{% extends "basicTemplates/basic.html" %}
+{% load staticfiles %}
+{% block title %}Registration{% endblock %}
+{% block subTitle %}<h3>Registration</h3>{% endblock %}
+
+{% block headerDifferencePart %}
+  {% include "basicTemplates/header_not_authorised.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <form>
+        <div class="form-group row">
+            <label for="userLogin" class="col-md-1 col-sm-12 col-form-label">Login</label>
+            <div class="col-md-auto col-sm-12">
+                <input type="text" class="form-control" id="userLogin" placeholder="login...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userEmail" class="col-md-1 col-sm-12 col-form-label">Email</label>
+            <div class="col-md-auto col-sm-12   ">
+                <input type="text" class="form-control" id="userEmail" placeholder="email...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userNickName" class="col-md-1 col-sm-12 col-form-label">NickName</label>
+            <div class="col-md-auto col-sm-12">
+                <input type="text" class="form-control" id="userNickName" placeholder="NickName...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userPassword1" class="col-md-1 col-sm-12 col-form-label">password</label>
+            <div class="col-md-auto col-sm-12">
+                <input type="password" class="form-control" id="userPassword1" placeholder="NickName...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userPassword2" class="col-md-1 col-sm-12 col-form-label">repeat password</label>
+            <div class="col-md-auto col-sm-12">
+                <input type="password" class="form-control" id="userPassword2" placeholder="NickName...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class="col-md-1 col-sm-12 col-form-label">Upload avatar</p>
+            <div class="col-md-auto co3-sm-12">
+                <input type="file" id="inputFile" accept="image/*"
+                       data-title="Drag and drop a file">
+                <br>
+                <button type="submit" class="btn btn-primary mt-2">Register!</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

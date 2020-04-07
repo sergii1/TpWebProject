@@ -1,0 +1,17 @@
+{% extends "basicTemplates/index_base.html" %}
+{% load staticfiles %}
+{% block title %}
+    {{tag}}
+{% endblock %}
+{% block subTitle %}<h3>Tag: {{ tag }}</h3>{% endblock %}
+
+
+{% block headerDifferencePart %}
+    {% if authorised %}
+        {% include "basicTemplates/header_authorised.html" %}
+    {% endif %}
+
+    {% if not authorised %}
+        {% include "basicTemplates/header_not_authorised.html" %}
+    {% endif %}
+{% endblock %}

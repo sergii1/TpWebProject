@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyAsk</title>
+     <link href="src/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!--шапка -->
+<div class="container-fluid sticky-top bg-light border-dark border-bottom">
+    <div class="row">
+        <div class="col col-md-auto justify-content-center align-self-center " style="font-size: 24px">
+            AskPupkin
+        </div>
+        <form class="form-inline col ">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ask</button>
+        </form>
+
+
+        <div class="col col-md-auto mr-2 ml-2 justify-content-center align-self-center">
+
+            <div class="row">
+                <a href="question.html" class="mr-2">log in</a>
+                <a href="question.html">register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--левая верхная часть-->
+<div class="container ml-0 mr-0 mt-2 mb-2 pl-2">
+    <div class="row ml-0">
+        <div class="col col-md-auto pl-1">
+            <h3 class="align-self-end mb-0">New Question</h3>
+        </div>
+    </div>
+</div>
+
+
+<!--часть с вопросами и топами -->
+<div class="container-fluid  mt-2 mb-2 pr-0">
+    <div class="row mr-0 pr-0">
+       <!--вопросы -->
+        <div class="col pl-2 col-10 ">
+            <form>
+                <div class="form-group row">
+                  <label for="questionTitle" class="col-md-1 col-sm-12 col-form-label">Title</label>
+                  <div class="col-md-11 col-sm-12">
+                    <input type="text" class="form-control" id="questionTitle" placeholder="Title...">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="questionText" class="col-md-1 col-sm-12 col-form-label">Text</label>
+                  <div class="col-md-11 col-sm-12   ">
+                      <textarea class="form-control" id="questionText" placeholder="Your question..."></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="questionTags" class="col-md-1 col-sm-12 col-form-label">Tags</label>
+                  <div class="col-md-11 col-sm-12">
+                    <input type="text" class="form-control" id="questionTags" placeholder="Tags...">
+                  </div>
+                </div>
+                 <button type="submit" class="btn btn-primary">Ask!</button>
+            </form>
+        </div>
+        <!-- правая часть -->
+        <div class="col-2 my-0 mr-auto">
+            <div class="row ml-0"><h3 class="ml-0">Popular tags</h3></div>
+            <ul class="list-group-horizontal pl-0 ml-0">
+                <li class="list-inline-item mr-0">perl</li>
+                <li class="list-inline-item">python</li>
+                <li class="list-inline-item">TechoPark</li>
+                <li class="list-inline-item">mysql</li>
+                <li class="list-inline-item">Django</li>
+                <li class="list-inline-item">mail.ru</li>
+                <li class="list-inline-item">bootstrap</li>
+                <li class="list-inline-item">html</li>
+            </ul>
+
+            <div class="row ml-0"><h3 class="ml-0">Best member</h3></div>
+            <ul class="list-group pl-0 ml-0">
+                <li class="list-inline-item mr-0"><a href="base.html" class="card-link">Mr.Freeman</a></li>
+                <li class="list-inline-item"><a href="base.html" class="card-link">Dr. House</a></li>
+                <li class="list-inline-item"><a href="base.html" class="card-link">Bender</a></li>
+                <li class="list-inline-item"><a href="base.html" class="card-link">Queen Victoria</a></li>
+                <li class="list-inline-item"><a href="base.html" class="card-link">V. Pupkin</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="src/bootstrap-4.3.1-dist/js/jquery.js"></script>
+<script src="src/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

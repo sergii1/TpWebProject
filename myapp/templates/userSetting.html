@@ -1,0 +1,42 @@
+{% extends "basicTemplates/index_base.html" %}
+{% load staticfiles %}
+{% block title %}Registration{% endblock %}
+{% block subTitle %}<h3>Registration</h3>{% endblock %}
+
+{% block headerDifferencePart %}
+  {% include "basicTemplates/header_authorised.html" %}
+{% endblock %}
+
+{% block content %}
+    <form>
+        <div class="form-group row">
+            <label for="userLogin" class="col-md-1 col-sm-12 col-form-label">Login</label>
+            <div class="col-md-auto col-sm-12">
+                <input type="text" class="form-control" id="userLogin" placeholder="login...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userEmail" class="col-md-1 col-sm-12 col-form-label">Email</label>
+            <div class="col-md-auto col-sm-12   ">
+                <input type="text" class="form-control" id="userEmail" placeholder="email...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userNickName" class="col-md-1 col-sm-12 col-form-label">NickName</label>
+            <div class="col-md-auto col-sm-12">
+                <input type="text" class="form-control" id="userNickName" placeholder="NickName...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class="col-md-1 col-sm-12 col-form-label">Upload avatar</p>
+            <div class="col-md-auto co3-sm-12">
+                <img src="{% static 'avatar.png' %}" class="img-thumbnail pr-2">
+                <br>
+                <input type="file" id="inputFile" accept="image/*"
+                       data-title="Drag and drop a file">
+                <br>
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
