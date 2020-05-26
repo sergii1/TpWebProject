@@ -35,6 +35,6 @@ class LoginForm(forms.Form):
 class AnswerForm(forms.Form):
     content = forms.CharField(label='Content', widget=forms.Textarea())
 
-    def clean_body_answer(self):
+    def clean_content(self):
         body_answer = self.cleaned_data['body_answer']
         return body_answer
