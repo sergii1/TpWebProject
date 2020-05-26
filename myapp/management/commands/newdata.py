@@ -1,11 +1,7 @@
 import random
-from django.core.management.base import BaseCommand, CommandError
-from django.db import IntegrityError
-from myapp.models import Question as Poll
-from myapp.models import Question, User, Tag, Answer, QuestionLike, Profile
+from django.core.management.base import BaseCommand
+from myapp.models import Question, User, Tag, Answer, Like, Profile
 from faker import Faker
-import myapp.models as Md
-from random import randint
 
 faker = Faker()
 
@@ -16,30 +12,31 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--users', type=int, default=0)
         parser.add_argument('--questions', type=int, default=0)
-        parser.add_argument('--number', type=int, default=1)
+        parser.add_argument('--tags', type=int, default=0)
 
     def handle(self, *args, **options):
-        number = options['number']
+        tags = options['tags']
+        users = options["users"]
+        questions = options["questions"]
 
-        self.create_tags()
-        self.create_profiles()
-        self.create_questions(number)
+        print("users ", users)
+        print("tags ", tags)
+        print("questions ", questions)
+
+        self.create_tags(tags)
+        self.create_profiles(users)
+        self.create_questions(questions)
         self.create_answers()
         self.create_likes()
 
-    def create_tags(self):
-        if Tag.objects.count() > 8:
-            return
-
-        for i in range(5):
+    def create_tags(self, tags):
+        for i in range(tags):
             tag = Tag.objects.create(name=faker.word() + str(i))
             tag.save()
 
-    def create_profiles(self):
-        if User.objects.count() > 8:
-            return
-        for i in range(8):
-            user = User.objects.create_user(faker.name()+str(i), faker.email(), '1234')
+    def create_profiles(self, users_amount):
+        for i in range(users_amount):
+            user = User.objects.create_user(faker.name() + str(i), faker.email(), '1234')
             user.save()
             p = Profile.objects.create(user=user)
             p.nickname = user.username
@@ -47,46 +44,47 @@ class Command(BaseCommand):
 
     def create_questions(self, number):
 
-        authors = Md.Profile.objects.all()
+        authors = Profile.objects.all()
         tags = Tag.objects.all()
         for i in range(number):
             question = Question.objects.create(title=faker.sentence(),
-                                               content=faker.text(),
+                                               content=faker.text() + "?",
                                                author=random.choice(authors),
                                                rating=0)
 
             for j in range(3):
                 tag = random.choice(tags)
                 question.tags.add(tag)
+                tag.rating += 1
+                tag.save()
             question.save()
 
     def create_answers(self):
         if Answer.objects.count() > 0:
             return
-        authors = Md.Profile.objects.all()
+        authors = Profile.objects.all()
         for question in Question.objects.all():
             for i in range(random.randint(1, 8)):
                 a = Answer.objects.create(content=faker.text(), question=question, author=random.choice(authors),
                                           rating=0, isCorrect=True)
-
                 a.save()
 
     def create_likes(self):
-        authors = Md.Profile.objects.all()
+        authors = Profile.objects.all()
         for question in Question.objects.all():
             for i in range(random.randint(1, 5)):
-                like = Md.QuestionLike()
+                like = Like()
                 like.value = 1
                 like.author = random.choice(authors)
-                like.question = question
+                like.content_object = question
                 like.save()
             question.save()
 
-        for answer in Md.Answer.objects.all():
+        for answer in Answer.objects.all():
             for i in range(random.randint(1, 5)):
-                like = Md.AnswerLike()
+                like = Like()
                 like.value = 1
                 like.author = random.choice(authors)
-                like.answer = answer
+                like.content_object = answer
                 like.save()
             answer.save()

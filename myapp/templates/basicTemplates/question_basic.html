@@ -13,7 +13,7 @@
                 <div class="col p-0">
                     <img src="{% static 'plus' %}" width="20px">
                     <img src="{% static 'minus' %}" width="20px">
-                    <span><br>+3</span>
+                    <span><br>{{question.get_rating}}</span>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="col p-0">
                         <img src="{% static 'plus' %}" width="20px">
                         <img src="{% static 'minus' %}" width="20px">
-                        <span><br>+3</span>
+                        <span><br>{{ answer.get_rating }}</span>
                     </div>
                 </div>
             </div>
@@ -73,16 +73,11 @@
     {% endfor %}
     <form method="POST">{% csrf_token %}
         <!--новый ответ -->
-        <div class="row mx-1  border-dark border-top  ml-1 col-md-auto mb-2 px-0">
-
-            <div class="col form-group px-0">
-                <label for="exampleFormControlTextarea1">Input your answer</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-
-        </div>
-        <button type="submit" class="btn btn-primary">Send answer</button>
-
+        <form method="POST" class="post-form" >{% csrf_token %}
+        {{form}}
+        <br>
+        <button type="submit" class="btn btn-primary">Answer!</button>
+    </form>
         <!--новый ответ -->
 {#     {{ form.as_p }}#}
 {#    <input type="submit" value="Send answer" class="btn btn-primary">#}

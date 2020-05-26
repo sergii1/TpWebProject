@@ -13,25 +13,9 @@
 {% endblock %}
 
 {% block content %}
-    <form>
-        <div class="form-group row">
-            <label for="questionTitle" class="col-md-1 col-sm-12 col-form-label">Title</label>
-            <div class="col-md-11 col-sm-12">
-                <input type="text" class="form-control" id="questionTitle" placeholder="Title...">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="questionText" class="col-md-1 col-sm-12 col-form-label">Text</label>
-            <div class="col-md-11 col-sm-12   ">
-                <textarea class="form-control" id="questionText" placeholder="Your question..."></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="questionTags" class="col-md-1 col-sm-12 col-form-label">Tags</label>
-            <div class="col-md-11 col-sm-12">
-                <input type="text" class="form-control" id="questionTags" placeholder="Tags...">
-            </div>
-        </div>
+    <form method="POST" class="post-form" >{% csrf_token %}
+        {{form}}
+        <br>
         <button type="submit" class="btn btn-primary">Ask!</button>
     </form>
 {% endblock %}

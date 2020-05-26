@@ -25,12 +25,15 @@ class QuestionAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     pass
 
-
-@admin.register(models.AnswerLike)
-class AnswerLikeAdmin(admin.ModelAdmin):
+@admin.register(models.Like)
+class AnswerAdmin(admin.ModelAdmin):
     pass
 
-
-@admin.register(models.QuestionLike)
-class QuestionLikeAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(models.AnswerLike)
+# class AnswerLikeAdmin(admin.ModelAdmin):
+#     pass
+#
+#
+# @admin.register(models.QuestionLike)
+# class QuestionLikeAdmin(admin.ModelAdmin):
+#     pass
