@@ -12,7 +12,6 @@ class QuestionForm(forms.Form):
         title = self.cleaned_data['title']
         print("\n\n\nclean data", title)
         if md.Question.objects.filter(title=title).count() != 0:
-            print("AAAAAAAAAAAAAA")
             raise forms.ValidationError('This question already exist')
         return title
 
@@ -36,5 +35,5 @@ class AnswerForm(forms.Form):
     content = forms.CharField(label='Content', widget=forms.Textarea())
 
     def clean_content(self):
-        body_answer = self.cleaned_data['body_answer']
-        return body_answer
+        content = self.cleaned_data['content']
+        return content
