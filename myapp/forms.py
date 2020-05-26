@@ -8,9 +8,11 @@ class QuestionForm(forms.Form):
     content = forms.CharField(label="Content", widget=forms.Textarea())
     tags = forms.CharField(label="Tags", required=False)
 
-    def clean_header(self):
+    def clean_title(self):
         title = self.cleaned_data['title']
-        if md.Question.objects.filter(title=title).count()!=0:
+        print("\n\n\nclean data", title)
+        if md.Question.objects.filter(title=title).count() != 0:
+            print("AAAAAAAAAAAAAA")
             raise forms.ValidationError('This question already exist')
         return title
 

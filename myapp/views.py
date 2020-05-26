@@ -48,16 +48,11 @@ def ask(request):
                        })
 
     form = forms.QuestionForm(request.POST)
-    # print("\n\n\n eeeeeeeeeeeeeeeeeeeers", form.cleaned_data['title'], form.cleaned_data['content'],
-    #       form.cleaned_data['tags'])
-    print("\n\nVALID", str(request.POST.get("title")))
-
     if form.is_valid():
         q = models.Question.objects.add_question(user=request.user, title=form.cleaned_data['title'],
                                                  content=form.cleaned_data['content'],
                                                  tags=form.cleaned_data['tags'])
 
-        print("\n\n\nIS VALId")
         return redirect('question', question_id=q.id)
 
     return render(request, template_name,
